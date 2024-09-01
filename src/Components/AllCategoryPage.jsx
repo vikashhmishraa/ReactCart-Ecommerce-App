@@ -14,7 +14,7 @@ const AllCategoryPage = () => {
   console.log("Category state:", category);
   return (
     <div>
-      <div className="flex items-center justify-center text-lime-700 text-3xl font-bold">
+      <div className="flex items-center justify-center text-lime-500 text-3xl font-bold">
         <h1>All Categories</h1>
       </div>
       <div className="flex flex-wrap">

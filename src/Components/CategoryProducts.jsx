@@ -9,17 +9,27 @@ const CatagoryProducts = () => {
   const categoryName = useSingleProductData();
   // const categoryName = useCategoryData();
 
+  // console.log("categoryName", categoryName[0].category); //sunglasses
+
+  // Check if categoryName is loaded and has data
+  if (!categoryName || !Array.isArray(categoryName)) {
+    return <SkeletionUI />;
+  }
+
   return (
     <>
+      <h1 className="flex items-center justify-center text-lime-500 text-3xl font-bold">
+        All {categoryName.length > 0 ? categoryName[0].category : "Products"}
+      </h1>
       <div className="products-container flex flex-wrap">
-        {categoryName == null ? (
-          <SkeletionUI />
-        ) : (
+        {categoryName.length > 0 ? (
           categoryName.map((obj) => (
             <Link key={obj.id} to={`/product/${obj.id}`}>
-              <Card key={obj.id} productData={obj} />
+              <Card productData={obj} />
             </Link>
           ))
+        ) : (
+          <p>No products available.</p>
         )}
       </div>
     </>
