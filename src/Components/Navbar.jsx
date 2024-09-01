@@ -28,6 +28,17 @@ const Navbar = () => {
     setTheme(theme == "light" ? "dark" : "light");
   };
 
+  const getGreeting = () => {
+    const hours = new Date().getHours();
+    if (hours < 12) {
+      return "Good Morning";
+    } else if (hours < 18) {
+      return "Good Afternoon";
+    } else {
+      return "Good Evening";
+    }
+  };
+
   return (
     <>
       {/* {console.log(query)} */}
@@ -86,9 +97,9 @@ const Navbar = () => {
                 <div className="w-12 h-12 rounded-full bg-lime-500 flex items-center justify-center text-white text-2xl font-bold">
                   V
                 </div>
-                <div>
+                <div className="mx-2">
                   <p className="flex text-xl justify-end ">Hey Vikas!</p>
-                  <p>Good Morning</p>
+                  <p>{getGreeting()}</p>
                 </div>
               </div>
             </li>
