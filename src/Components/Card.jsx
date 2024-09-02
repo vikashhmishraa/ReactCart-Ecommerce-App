@@ -31,7 +31,7 @@ const Card = ({ productData }) => {
         onClick={handleClick}
       >
         <figure>
-          <img src={thumbnail} />
+          <img loading="lazy" src={thumbnail} />
         </figure>
         <div className="card-body">
           <h2 className="card-title">{title}</h2>
