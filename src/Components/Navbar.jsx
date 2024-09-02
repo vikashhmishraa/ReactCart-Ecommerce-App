@@ -128,7 +128,7 @@ const Navbar = () => {
                 </div>
               </div>
             </li>
-            <div className="absolute ml-[445px] bg-lime-200 px-4 py-[25px] rounded-md">
+            <div className="absolute ml-[445px] bg-lime-200 px-3 py-[25px] rounded-md">
               <label className="grid cursor-pointer place-items-center">
                 <input
                   onClick={handleThemeChange}
