@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { ThemeStore } from "../Components/ContextStores/ThemeContext.jsx";
 
 const ThankYouPage = () => {
+  const { theme } = useContext(ThemeStore);
+
+  let lightTheme =
+    "flex flex-col items-center justify-center h-[600px] bg-white p-4";
+  let darkTheme =
+    "flex flex-col items-center justify-center h-[600px] bg-base-700 p-4";
+
   return (
-    <div className="flex flex-col items-center justify-center h-[600px] bg-white p-4">
+    <div className={theme == "light" ? lightTheme : darkTheme}>
       <div className="bg-white p-8 rounded-md shadow-md w-full max-w-md text-center animate__animated animate__fadeIn border-2 border-lime-500">
         <i className="ri-checkbox-circle-fill text-lime-500 text-6xl mb-4 animate__animated animate__bounceIn"></i>
         <h1 className="text-3xl font-bold text-lime-500 mb-4">Thank You!</h1>
