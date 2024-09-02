@@ -58,7 +58,7 @@ const Navbar = () => {
 
   let ScrolledNav =
     "w-full fixed  top-[-16px] left-[-16px] z-50 px-[-4px] rounded-none";
-  let NonScrolledNav = "w-[98vw]  top-0 left-0  z-50  right-[50px] rounded-md ";
+  let NonScrolledNav = "w-[98vw]   z-50  rounded-md ";
 
   return (
     <>
@@ -128,7 +128,7 @@ const Navbar = () => {
                 </div>
               </div>
             </li>
-            <div className="absolute ml-[445px] bg-lime-200 px-3 py-[25px] rounded-md">
+            <div className="absolute ml-[435px] bg-lime-200 px-4 py-[25px] rounded-md">
               <label className="grid cursor-pointer place-items-center">
                 <input
                   onClick={handleThemeChange}
