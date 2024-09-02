@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import SearchBar from "./SearchBar";
 import { Link, useNavigate } from "react-router-dom";
 import { ThemeStore } from "../Components/ContextStores/ThemeContext.jsx";
@@ -21,9 +21,9 @@ const Navbar = () => {
   };
 
   let lightTheme =
-    " width-screen flex justify-between items-center  bg-[#064C4F] text-white mx-4 my-4   px-8 rounded-md";
+    " width-screen flex justify-between items-center  bg-[#064C4F] text-white mx-4 my-4   px-6 rounded-md";
   let darkTheme =
-    "width-screen flex justify-between items-center  bg-black text-white mx-4 my-4   px-8 rounded-md";
+    "width-screen flex justify-between items-center  bg-black text-white mx-4 my-4   px-6 rounded-md";
   const handleThemeChange = () => {
     setTheme(theme == "light" ? "dark" : "light");
   };
@@ -39,10 +39,35 @@ const Navbar = () => {
     }
   };
 
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  let ScrolledNav =
+    "w-full fixed  top-[-16px] left-[-16px] z-50 px-[-4px] rounded-none";
+  let NonScrolledNav = "w-[98vw]  top-0 left-0  z-50  right-[50px] rounded-md ";
+
   return (
     <>
       {/* {console.log(query)} */}
-      <div className={theme == "light" ? lightTheme : darkTheme}>
+      <div
+        className={`${theme === "light" ? lightTheme : darkTheme} ${
+          isScrolled ? ScrolledNav : NonScrolledNav
+        } transition-all duration-300`}
+      >
         <div className="flex items-center space-x-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -103,7 +128,7 @@ const Navbar = () => {
                 </div>
               </div>
             </li>
-            <div className="absolute ml-[420px] bg-lime-200 px-4 py-[25px] rounded-md">
+            <div className="absolute ml-[445px] bg-lime-200 px-4 py-[25px] rounded-md">
               <label className="grid cursor-pointer place-items-center">
                 <input
                   onClick={handleThemeChange}
