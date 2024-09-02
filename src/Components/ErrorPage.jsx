@@ -11,7 +11,7 @@ const ErrorPage = () => {
   return (
     <>
       <Navbar />
-      <div className="flex items-center justify-center h-[61vh] bg-white">
+      <div className="flex items-center justify-center h-[80vh] bg-white">
         <div className="text-center">
           <h1 className="text-9xl font-bold text-lime-500">404</h1>
           <h2 className="text-4xl mt-4 text-gray-700">Oops! Page Not Found</h2>

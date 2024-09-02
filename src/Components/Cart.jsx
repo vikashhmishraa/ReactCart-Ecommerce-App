@@ -62,8 +62,8 @@ const Cart = () => {
     <div
       className={
         theme === "light"
-          ? "min-h-[60vh] bg-white py-8 px-4"
-          : "min-h-[60vh] bg-base-700 py-8 px-4"
+          ? "min-h-[80vh] bg-white py-8 px-4"
+          : "min-h-[80vh] bg-base-700 py-8 px-4"
       }
     >
       <h1 className="text-3xl font-bold text-lime-600 mb-6">Your Cart</h1>

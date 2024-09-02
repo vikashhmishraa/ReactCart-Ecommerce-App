@@ -4,9 +4,9 @@ const FoodApp = () => {
   const { theme } = useContext(ThemeStore);
 
   let lightTheme =
-    "min-h-10 flex flex-col items-center justify-center bg-white";
+    "min-h-[75vh] flex flex-col items-center justify-center bg-white";
   let darkTheme =
-    "min-h-10 flex flex-col items-center justify-center bg-base-700";
+    "min-h-[75vh] flex flex-col items-center justify-center bg-base-700";
 
   return (
     <div className={theme == "light" ? lightTheme : darkTheme}>

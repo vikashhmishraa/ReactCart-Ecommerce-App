@@ -2,8 +2,8 @@ import React, { useContext } from "react";
 import { ThemeStore } from "../Components/ContextStores/ThemeContext.jsx";
 const Profile = () => {
   const { theme } = useContext(ThemeStore);
-  let lightTheme = "min-h-10 bg-white flex flex-col items-center py-10";
-  let darkTheme = "min-h-10 bg-base-700 flex flex-col items-center py-10";
+  let lightTheme = "min-h-[75vh] bg-white flex flex-col items-center py-10";
+  let darkTheme = "min-h-[75vh] bg-base-700 flex flex-col items-center py-10";
 
   return (
     <div className={theme == "light" ? lightTheme : darkTheme}>
