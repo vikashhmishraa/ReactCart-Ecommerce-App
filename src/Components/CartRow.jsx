@@ -11,7 +11,7 @@ const CartRow = ({ obj, removeItem }) => {
   let dispatch = useDispatch();
   let { id, thumbnail, price, rating, description, title } = data;
 
-  let totalQuantityPrice = price * quantity;
+  let totalQuantityPrice = (Number(price) * quantity).toFixed(2);
 
   let handleRemove = () => {
     console.log("remove Clicked");

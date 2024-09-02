@@ -2,9 +2,11 @@ import React, { useContext, useState, useEffect } from "react";
 import { ThemeStore } from "../Components/ContextStores/ThemeContext.jsx";
 import CartRow from "./CartRow.jsx";
 import { useDispatch, useSelector } from "react-redux";
-import { clearCart } from "../Store/CartSlice.js";
+import { checkoutCart, clearCart } from "../Store/CartSlice.js";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
+  const navigate = useNavigate();
   const { theme } = useContext(ThemeStore);
   const dispatch = useDispatch();
   const cartData = useSelector((state) => state.cart.cart);
@@ -45,6 +47,10 @@ const Cart = () => {
   const handleClearCart = () => {
     console.log("clear clicked");
     dispatch(clearCart());
+  };
+
+  const handleCheckout = () => {
+    navigate("/thank-you");
   };
   // Calculate the total of total prices
   const totalAmount = sortedCartData.reduce((total, item) => {
@@ -118,7 +124,10 @@ const Cart = () => {
           >
             Clear Cart
           </button>
-          <button className="bg-lime-500 text-white px-6 py-2 rounded-md text-lg font-semibold hover:bg-lime-600">
+          <button
+            onClick={handleCheckout}
+            className="bg-lime-500 text-white px-6 py-2 rounded-md text-lg font-semibold hover:bg-lime-600"
+          >
             Proceed to Checkout
           </button>
         </div>

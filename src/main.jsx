@@ -16,6 +16,8 @@ let AllCategoryPage = lazy(() => import("./Components/AllCategoryPage.jsx"));
 let CategoryProducts = lazy(() => import("./Components/CategoryProducts.jsx"));
 let ProductPage = lazy(() => import("./Components/ProductPage.jsx"));
 let FoodApp = lazy(() => import("./Components/FoodApp.jsx"));
+let ThankYouPage = lazy(() => import("./Components/ThankYourPage.jsx"));
+let ViewYourOrdersPage = lazy(() => import("./Components/OrderHistory.jsx"));
 
 const appRouter = createBrowserRouter([
   {
@@ -63,6 +65,22 @@ const appRouter = createBrowserRouter([
         element: (
           <Suspense fallback={<h1>Hello Food App</h1>}>
             <FoodApp />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/thank-You",
+        element: (
+          <Suspense fallback={<h1>Thank You Page Loading</h1>}>
+            <ThankYouPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/order-history",
+        element: (
+          <Suspense fallback={<h1>Thank You Page Loading</h1>}>
+            <ViewYourOrdersPage />
           </Suspense>
         ),
       },
