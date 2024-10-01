@@ -11,6 +11,7 @@ import Home from "./Components/Home.jsx";
 import ThemeContext from "./Components/ContextStores/ThemeContext.jsx";
 import { Provider } from "react-redux";
 import Store from "./Store/Store.js";
+import AuthWrapper from "../src/Components/AuthWrapper.jsx"
 
 // import SkeletionUI from "./Components/Skeletons/SkeletionUI.jsx";
 let AllCategoryPage = lazy(() => import("./Components/AllCategoryPage.jsx"));
@@ -23,7 +24,11 @@ let ViewYourOrdersPage = lazy(() => import("./Components/OrderHistory.jsx"));
 const appRouter = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: (
+      <AuthWrapper>
+        <App />
+      </AuthWrapper>
+    ),
     children: [
       {
         path: "/",

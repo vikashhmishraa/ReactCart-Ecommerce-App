@@ -5,7 +5,7 @@ export const signupSchema = Yup.object({
     email : Yup.string().email('Invalid email address').required('Required'),
     password : Yup.string()
     .required('No password provided.') 
-    .min(8, 'Password is too short - should be 8 chars minimum.')
+    .min(4, 'Password is too short - should be 4 chars minimum.')
     .matches(/[a-zA-Z]/, 'Password can only contain Latin letters.'),
 })
 
@@ -13,6 +13,6 @@ export const loginSchema = Yup.object({
     email : Yup.string().email('Invalid email address').required('Required'),
     password : Yup.string()
     .required('No password provided.') 
-    .min(8, 'Password is too short - should be 8 chars minimum.')
+    .min(4, 'Password is too short - should be 4 chars minimum.')
     .matches(/[a-zA-Z]/, 'Password can only contain Latin letters.'),
 })  
