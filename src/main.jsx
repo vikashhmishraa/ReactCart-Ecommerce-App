@@ -6,6 +6,7 @@ import Cart from "./Components/Cart.jsx";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ErrorPage from "./Components/ErrorPage.jsx";
+import Login from "./Components/Login.jsx";
 import Home from "./Components/Home.jsx";
 import ThemeContext from "./Components/ContextStores/ThemeContext.jsx";
 import { Provider } from "react-redux";
@@ -86,6 +87,10 @@ const appRouter = createBrowserRouter([
       },
     ],
     errorElement: <ErrorPage />,
+  },
+  {
+    path: "/login",
+    element: <Login />,
   },
 ]);
 
