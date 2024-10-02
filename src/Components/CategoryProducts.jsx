@@ -1,5 +1,5 @@
 // import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import Card from "./Card";
 import SkeletionUI from "./Skeletons/SkeletionUI";
 import useSingleProductData from "../CustomHooks/useCategoryProductData";
@@ -23,10 +23,10 @@ const CatagoryProducts = () => {
       </h1>
       <div className="products-container flex flex-wrap">
         {categoryName.length > 0 ? (
-          categoryName.map((obj) => (
-            <Link key={obj.id} to={`/product/${obj.id}`}>
-              <Card productData={obj} />
-            </Link>
+          categoryName.map((obj, idx) => (
+            // <Link key={obj.id} to={`/product/${obj.id}`}>
+              <Card  key={idx} productData={obj} />
+            // </Link>
           ))
         ) : (
           <p>No products available.</p>

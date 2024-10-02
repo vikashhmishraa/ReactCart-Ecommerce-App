@@ -13,22 +13,22 @@ const AuthWrapper = ({ children }) => {
   let dispatch = useDispatch();
 
   let getUser = async () => {
-    setIsLoading(true);
-    let apiRes = await axios.get(baseUrl + getUrl, { withCredentials: true });
+    try {
+      let apiRes = await axios.get(baseUrl + getUrl, { withCredentials: true });
 
-    let data = apiRes?.data;
+      let data = apiRes?.data;
 
-    if (data?.result == true) {
-      setIsUser(true);
-    //   console.log("data",data)
-    //   console.log("data data",data.da)
-
-      dispatch(addUser(data.data));
-    } else {
-      setIsUser(false);
+      if (data?.result == true) {
+        setIsUser(true);
+        dispatch(addUser(data.data));
+      } else {
+        setIsUser(false);
+      }
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setIsLoading(false);
     }
-
-    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -36,12 +36,14 @@ const AuthWrapper = ({ children }) => {
   }, []);
 
   if (isLoading == true) {
-    return <SkeletionUI></SkeletionUI>;
+    return <SkeletionUI/>;
   }
 
-  return <>{isUser ? children : <Navigate to="/login"></Navigate>}</>;
+  if (isUser == false) {
+    return <Navigate to="/login"></Navigate>;
+  }
+
+  return children;
 };
-
-
 
 export default AuthWrapper;

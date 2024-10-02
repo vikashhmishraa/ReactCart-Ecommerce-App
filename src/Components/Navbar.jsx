@@ -3,6 +3,9 @@ import SearchBar from "./SearchBar";
 import { Link, useNavigate } from "react-router-dom";
 import { ThemeStore } from "../Components/ContextStores/ThemeContext.jsx";
 import { useSelector } from "react-redux";
+import Logout from "./Logout.jsx";
+
+
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -10,8 +13,23 @@ const Navbar = () => {
   const { theme, setTheme } = useContext(ThemeStore);
   console.log("-->", theme, setTheme);
 
+
+
+
   const cartData = useSelector((store) => store.cart.cart);
   console.log("cart", cartData.length);
+
+
+
+  
+  // const dispatch = useDispatch();
+
+  const userData = useSelector((store) => store.user);
+  
+  
+
+
+  const userName = userData.user ? userData.user.userName : "Guest";
 
   const handleFoodClick = () => {
     navigate("/order-food");
@@ -19,6 +37,9 @@ const Navbar = () => {
   const handleProfileClick = () => {
     navigate("/profile");
   };
+
+
+
 
   let lightTheme =
     " width-screen flex justify-between items-center  bg-[#064C4F] text-white mx-4 my-4   px-6 rounded-md";
@@ -59,6 +80,9 @@ const Navbar = () => {
   let ScrolledNav =
     "w-full fixed  top-[-16px] left-[-16px] z-50 px-[-4px] rounded-none";
   let NonScrolledNav = "w-[98vw]   z-50  rounded-md ";
+
+
+  const shortName = userName.charAt(0).toUpperCase()
 
   return (
     <>
@@ -114,20 +138,24 @@ const Navbar = () => {
               </Link>
               {/* <a className="text-xl">Cart</a> */}
             </li>
-            <li>
-              <div onClick={handleProfileClick} className="mr-16">
-                {/* <div className=" mask mask-squircle w-10 rounded">
-                  <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
-                </div> */}
-                <div className="w-12 h-12 rounded-full bg-lime-500 flex items-center justify-center text-white text-2xl font-bold">
-                  V
-                </div>
-                <div className="mx-2">
-                  <p className="flex text-xl justify-end ">Hey Vikas!</p>
-                  <p>{getGreeting()}</p>
-                </div>
+            <li className="relative group">
+            <div onClick={handleProfileClick} className="mr-16 flex items-center">
+              <div className="w-12 h-12 rounded-full bg-lime-500 flex items-center text-center justify-center text-white test and visits
+              font-bold">
+              <span className="text-3xl">{shortName}</span>
               </div>
-            </li>
+              <div className="mx-2">
+                <p className="flex text-xl justify-end">Hey {userName}!</p>
+                <p>{getGreeting()}</p>
+              </div>
+            </div>
+            
+            {/* Dropdown menu */}
+            <div className="absolute bg-white hidden group-hover:block  border hover:bg-white border-white rounded shadow-lg  mt-16 z-10 ml-8">
+              <Logout />
+            </div>
+          </li>
+          
             <div className="absolute ml-[435px] bg-lime-200 px-4 py-[25px] rounded-md">
               <label className="grid cursor-pointer place-items-center">
                 <input

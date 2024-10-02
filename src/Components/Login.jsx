@@ -1,13 +1,11 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { ThemeStore } from "../Components/ContextStores/ThemeContext.jsx";
 import { useFormik } from "formik";
 import { loginSchema, signupSchema } from "../utility/validationSchema.js";
 import axios from "axios";
-import { baseUrl, signupUrl, loginUrl } from "../utility/constants.js";
+import { baseUrl, signupUrl, loginUrl, getUrl } from "../utility/constants.js";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-
-
 
 const AuthPage = () => {
   const { theme } = useContext(ThemeStore);
@@ -15,19 +13,32 @@ const AuthPage = () => {
   const [isError, setIsError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-
   const lightTheme =
     "min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-200 to-green-500";
   const darkTheme =
     "min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 to-green-800";
 
-    
-//   if(userData.user != null ){
-//     navigate("/");
-//   }
-
   let navigate = useNavigate();
 
+  let getUser = async () => {
+    try {
+      let apiRes = await axios.get(baseUrl + getUrl, { withCredentials: true });
+
+      let data = apiRes?.data;
+
+      console.log(data);
+
+      if (data?.result == true) {
+        navigate("/");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    getUser();
+  }, []);
 
   const formik = useFormik({
     initialValues: {
@@ -37,10 +48,9 @@ const AuthPage = () => {
     },
     validationSchema: isLogin ? loginSchema : signupSchema,
     onSubmit: async (values, action) => {
-        
       setIsLoading(true);
       let { userName, email, password } = values;
-      
+
       let response = await axios.post(
         isLogin ? baseUrl + loginUrl : baseUrl + signupUrl,
         { userName, email, password },
@@ -56,7 +66,6 @@ const AuthPage = () => {
       } else {
         setIsError(resData.message);
       }
-
 
       // Handle form submission
       console.log(values);
@@ -139,12 +148,18 @@ const AuthPage = () => {
             type="submit"
             className="mt-4 py-3 bg-lime-600 text-white font-semibold rounded-lg shadow hover:bg-lime-700 transition duration-200"
           >
-            {isLoading ? <span className="loading loading-spinner loading-md"></span> : isLogin ? "Login" : "Sign Up"}
+            {isLoading ? (
+              <span className="loading loading-spinner loading-md"></span>
+            ) : isLogin ? (
+              "Login"
+            ) : (
+              "Sign Up"
+            )}
           </button>
 
           <p className="text-xl text-red-600 ">
-          {isError != false ? isError : ""}
-        </p>
+            {isError != false ? isError : ""}
+          </p>
         </form>
         <p
           className={`mt-5 text-center ${

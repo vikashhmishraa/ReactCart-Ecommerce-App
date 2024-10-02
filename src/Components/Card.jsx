@@ -15,7 +15,7 @@ const Card = ({ productData }) => {
 
   const handleAddtoCart = (event) => {
     event.stopPropagation();
-    // console.log("Item Added to Cart");
+    console.log("Item Added to Cart");
     dispatch(addCart(productData));
   };
 
