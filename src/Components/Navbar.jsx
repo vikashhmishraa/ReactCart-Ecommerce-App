@@ -5,29 +5,18 @@ import { ThemeStore } from "../Components/ContextStores/ThemeContext.jsx";
 import { useSelector } from "react-redux";
 import Logout from "./Logout.jsx";
 
-
-
 const Navbar = () => {
   const navigate = useNavigate();
 
   const { theme, setTheme } = useContext(ThemeStore);
   console.log("-->", theme, setTheme);
 
-
-
-
   const cartData = useSelector((store) => store.cart.cart);
   console.log("cart", cartData.length);
 
-
-
-  
   // const dispatch = useDispatch();
 
   const userData = useSelector((store) => store.user);
-  
-  
-
 
   const userName = userData.user ? userData.user.userName : "Guest";
 
@@ -37,9 +26,6 @@ const Navbar = () => {
   const handleProfileClick = () => {
     navigate("/profile");
   };
-
-
-
 
   let lightTheme =
     " width-screen flex justify-between items-center  bg-[#064C4F] text-white mx-4 my-4   px-6 rounded-md";
@@ -81,8 +67,7 @@ const Navbar = () => {
     "w-full fixed  top-[-16px] left-[-16px] z-50 px-[-4px] rounded-none";
   let NonScrolledNav = "w-[98vw]   z-50  rounded-md ";
 
-
-  const shortName = userName.charAt(0).toUpperCase()
+  const shortName = userName.charAt(0).toUpperCase();
 
   return (
     <>
@@ -92,7 +77,7 @@ const Navbar = () => {
           isScrolled ? ScrolledNav : NonScrolledNav
         } transition-all duration-300`}
       >
-        <div className="flex items-center space-x-2">
+        <div className="flex w-1/3 items-center space-x-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -106,16 +91,20 @@ const Navbar = () => {
             React Cart
           </Link>
         </div>
-        <SearchBar />
+        <div className="w-1/3">
+          <SearchBar />
+        </div>
 
-        <div className="flex-none">
-          <ul className="menu menu-horizontal px-1 items-center">
-            <div
-              onClick={handleFoodClick}
-              className="bg-white p-4 mx-4 rounded-lg text-lime-800 font-bold cursor-pointer hover:bg-lime-200 hover:transition ease-in-out delay-150 hover:scale-95"
-            >
-              Order Food
-            </div>
+        <div className="w-1/3 py-1 ">
+          <ul className="flex  items-center justify-between ">
+            <li>
+              <div
+                onClick={handleFoodClick}
+                className="bg-white p-4  rounded-lg text-lime-800 font-bold cursor-pointer hover:bg-lime-200 hover:transition ease-in-out delay-150 hover:scale-95"
+              >
+                Order Food
+              </div>
+            </li>
             <li>
               <Link to={"/cart"}>
                 <div className="relative cursor-pointer p-3 rounded-full bg-white text-lime-500 hover:bg-lime-500 hover:text-white transition-colors hover:border-dashed border-2">
@@ -127,74 +116,81 @@ const Navbar = () => {
                   >
                     <path d="M4.00436 6.41686L0.761719 3.17422L2.17593 1.76001L5.41857 5.00265H20.6603C21.2126 5.00265 21.6603 5.45037 21.6603 6.00265C21.6603 6.09997 21.6461 6.19678 21.6182 6.29L19.2182 14.29C19.0913 14.713 18.7019 15.0027 18.2603 15.0027H6.00436V17.0027H17.0044V19.0027H5.00436C4.45207 19.0027 4.00436 18.5549 4.00436 18.0027V6.41686ZM6.00436 7.00265V13.0027H17.5163L19.3163 7.00265H6.00436ZM5.50436 23.0027C4.67593 23.0027 4.00436 22.3311 4.00436 21.5027C4.00436 20.6742 4.67593 20.0027 5.50436 20.0027C6.33279 20.0027 7.00436 20.6742 7.00436 21.5027C7.00436 22.3311 6.33279 23.0027 5.50436 23.0027ZM17.5044 23.0027C16.6759 23.0027 16.0044 22.3311 16.0044 21.5027C16.0044 20.6742 16.6759 20.0027 17.5044 20.0027C18.3328 20.0027 19.0044 20.6742 19.0044 21.5027C19.0044 22.3311 18.3328 23.0027 17.5044 23.0027Z"></path>
                   </svg>
+                  {cartData.length > 0 ? (
+                    <div>
+                      <sup className="absolute text-white  flex bg-red-700 h-5 w-5 items-center justify-center  ml-4 rounded-xl">
+                        <b>{cartData.length}</b>
+                      </sup>
+                    </div>
+                  ) : (
+                    <div></div>
+                  )}
                 </div>
-                {cartData.length > 0 ? (
-                  <sup className="flex bg-red-700 h-5 w-5 items-center justify-center m-[-25px] mt-[-50px] rounded-xl">
-                    <b>{cartData.length}</b>
-                  </sup>
-                ) : (
-                  <div></div>
-                )}
               </Link>
               {/* <a className="text-xl">Cart</a> */}
             </li>
-            <li className="relative group">
-            <div onClick={handleProfileClick} className="mr-16 flex items-center">
-              <div className="w-12 h-12 rounded-full bg-lime-500 flex items-center text-center justify-center text-white test and visits
-              font-bold">
-              <span className="text-3xl">{shortName}</span>
-              </div>
-              <div className="mx-2">
-                <p className="flex text-xl justify-end">Hey {userName}!</p>
-                <p>{getGreeting()}</p>
-              </div>
-            </div>
-            
-            {/* Dropdown menu */}
-            <div className="absolute bg-white hidden group-hover:block  border hover:bg-white border-white rounded shadow-lg  mt-16 z-10 ml-8">
-              <Logout />
-            </div>
-          </li>
-          
-            <div className="absolute ml-[435px] bg-lime-200 px-4 py-[25px] rounded-md">
-              <label className="grid cursor-pointer place-items-center">
-                <input
-                  onClick={handleThemeChange}
-                  type="checkbox"
-                  value="synthwave"
-                  className="toggle theme-controller bg-base-content col-span-2 col-start-1 row-start-1"
-                />
-                <svg
-                  className="stroke-base-100 fill-base-100 col-start-1 row-start-1"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
+            <li className="relative p-1 group hover:border rounded-lg">
+              <div onClick={handleProfileClick} className=" flex items-center">
+                <div
+                  className="w-12 h-12 rounded-full bg-lime-500 flex items-center text-center justify-center text-white test and visits
+              font-bold"
                 >
-                  <circle cx="12" cy="12" r="5" />
-                  <path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4" />
-                </svg>
-                <svg
-                  className="stroke-base-100 fill-base-100 col-start-2 row-start-1"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                </svg>
-              </label>
-            </div>
+                  <span className="text-3xl">{shortName}</span>
+                </div>
+                <div className="mx-2">
+                  <p className="flex text-xl justify-end">Hey {userName}!</p>
+                  <p>{getGreeting()}</p>
+                </div>
+              </div>
+            </li>
+            <li>
+              {/* Dropdown menu */}
+              <div className=" bg-white   border hover:bg-white border-white rounded shadow-lg  ">
+                <Logout />
+              </div>
+            </li>
+
+            <li>
+              <div className=" bg-lime-200 px-4 py-[25px] rounded-md">
+                <label className="grid cursor-pointer place-items-center">
+                  <input
+                    onClick={handleThemeChange}
+                    type="checkbox"
+                    value="synthwave"
+                    className="toggle theme-controller bg-base-content col-span-2 col-start-1 row-start-1"
+                  />
+                  <svg
+                    className="stroke-base-100 fill-base-100 col-start-1 row-start-1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <circle cx="12" cy="12" r="5" />
+                    <path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4" />
+                  </svg>
+                  <svg
+                    className="stroke-base-100 fill-base-100 col-start-2 row-start-1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                  </svg>
+                </label>
+              </div>
+            </li>
           </ul>
         </div>
       </div>
